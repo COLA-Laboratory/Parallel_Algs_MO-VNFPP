@@ -1,0 +1,72 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{multirow}
+\usepackage{relsize}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{arrows.meta}
+\tikzset{
+    between/.style args={#1 and #2}{
+    	at = ($(#1)!0.5!(#2)$)
+    }
+}
+
+\setlength{\belowcaptionskip}{-1em}
+
+\begin{document}
+
+\title{Parallel Algorithms for the Multiobjective Virtual Network Function Placement Problem \thanks{Supported by EPSRC Industrial CASE and British Telecom under grant 16000177.}}
+
+\author{
+	Joseph Billingsley\inst{1} \and
+	Ke Li\inst{1} \and
+	Wang Miao\inst{1} \and
+	Geyong Min\inst{1} \and \\
+	Nektarios Georgalas\inst{2}}
+
+\authorrunning{J. Billingsley et al.}
+
+\titlerunning{Parallel Algorithms for MO-VNFPP}
+
+\institute{Department of Computer Science,
+	University of Exeter, UK \\
+	\email{\{jb931, k.li, wang.miao, g.min\}@exeter.ac.uk} \and
+	Research and Innovation, British Telecom,
+	\email{nektarios.georgalas@bt.com}}
+
+\maketitle
+
+\begin{abstract}
+	Datacenters are critical to the commercial and social activities of modern society but are also major electricity consumers. To minimize their environmental impact, we must make datacentres more efficient whilst keeping the quality of service high. In this work we consider how a key datacenter component, Virtual Network Functions (VNFs), can be placed in the datacenter to optimise the conflicting objectives of minimizing service latency, packet loss and energy consumption. Multiobjective Evolutionary Algorithms (MOEAs) have been proposed to solve the Virtual Network Function Placement Problem (VNFPP), but state of the art algorithms are too slow to solve the large problems found in industry. Parallel Multiobjective Evolutionary Algorithms (PMOEAs) can reduce execution time by distributing the optimization process over many processes. However, this can hamper the search process as it is inefficient to share information between processes. This paper aims to determine whether PMOEAs can efficiently discover good solutions to the VNFPP. We found that PMOEAs can solve the VNFPP 5 - 10x faster than a sequential MOEA without harming solution quality. Additionally, we found that one parallel algorithm, PPLS/D, found \textit{better} solutions than other MOEAs and PMOEAs in most test instances. These results demonstrate that PMOEAs can solve the VNFPP faster, and in some instances better, than sequential MOEAs.
+
+	\keywords{Network Function Virtualisation \and Multi-Objective Optimisation \and Parallel Multiobjective Evolutionary Algorithms}
+\end{abstract}
+
+\input{introduction}
+
+\input{problem_formulation}
+
+\input{algorithms}
+
+\input{results}
+
+\input{conclusions}
+
+\bibliographystyle{splncs04}
+\bibliography{bibliography}
+
+\subsubsection*{Acknowledgements}
+K. Li was supported by UKRI Future Leaders Fellowship (Grant No. MR/S017062/1) and Royal Society (Grant No. IEC/NSFC/170243). J. Billingsley was supported by EPSRC Industrial CASE and British Telecom (Grant No. 16000177). The authors would also like to acknowledge the use of the University of Exeter High-Performance Computing facility in carrying out this work and thank the developers and maintainers of Rust and the Rayon library.
+
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgfplotstable}
+
+% read in data file
+\pgfplotstableread{../../../../processed/pcp/FatTree/4000/32/PPLS/pcp.csv}\iris
+% get number of data points
+\pgfplotstablegetrowsof{\iris}
+\pgfmathsetmacro\NumRows{\pgfplotsretval-1}
+
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.16}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={
+    group name=iris,
+    group size=3 by 1,
+    horizontal sep=0cm
+  },
+  axis y line=left,
+  hide x axis,
+  width=4cm,
+  height=6cm,
+  xmin=0,
+  xmax=0.5,
+  enlarge y limits,
+  every axis plot/.append style={opacity=0}
+]
+
+\nextgroupplot
+
+\pgfplotsinvokeforeach{0,...,\NumRows} % loop over all rows in table
+{
+  % get value in sw column
+  \pgfplotstablegetelem{#1}{la}\of{\iris}%
+   % add a coordinate at x=0 and that y-value
+  \edef\temp{\noexpand\addplot coordinates {(0,\pgfplotsretval)} coordinate (pl#1);}
+  \temp
+}
+
+\nextgroupplot
+
+\pgfplotsinvokeforeach{0,...,\NumRows}
+{
+  \pgfplotstablegetelem{#1}{pl}\of{\iris}%
+  \edef\temp{\noexpand\addplot coordinates {(0,\pgfplotsretval)} coordinate (la#1);}
+  \temp
+}
+
+\nextgroupplot
+
+\pgfplotsinvokeforeach{0,...,\NumRows}
+{
+  \pgfplotstablegetelem{#1}{en}\of{\iris}%
+  \edef\temp{\noexpand\addplot coordinates {(0,\pgfplotsretval)} coordinate (en#1);}
+  \temp
+}
+
+\end{groupplot}
+
+% add labels below
+\foreach \i in {0,...,\NumRows}
+   \draw [color=blue,opacity=0.1] (pl\i) -- (la\i) -- (en\i);
+
+\foreach \i/\txt in {1/LA,2/PL,3/EN}
+   \node [below] at (iris c\i r1.south west) {\txt};
+
+\end{tikzpicture}
+\end{document}

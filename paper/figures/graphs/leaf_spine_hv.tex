@@ -1,0 +1,241 @@
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=newest}
+\pgfplotsset{
+    yticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=2
+    },
+    scaled y ticks=false
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+    \begin{axis}[
+        footnotesize,
+        max space between ticks=20pt,
+        width=1.5\textwidth,
+        height=0.38\textwidth,
+        try min ticks=5,
+        xtick=data,
+        xticklabels={32, 48, 80, 160, 320, 32, 48, 80, 160, 320, 32, 48, 80, 160, 320, 32, 48, 80, 160, 320, 32, 48, 80, 160, 320},
+        extra x ticks={5,11,17,23},
+        extra x tick labels={},
+        extra x tick style={
+            grid=major,
+            major tick length=0pt,
+        },
+        xlabel={Problem Size / Population Size},
+        ylabel={Normalised Mean HV},
+        xlabel style={
+            yshift=-4ex,
+        },
+        enlarge x limits={abs=0.75},
+        legend pos=north east,
+        legend entries={
+            {NSGA-II},
+            {MS-NSGA-II},
+            {MD-NSGA-II},
+            {PPLS/D},
+        },
+        clip mode=individual,
+        legend style={font=\tiny}
+    ]
+
+    \addplot[
+        mark=x,
+        color=red
+    ] table[
+        x expr=\coordindex,
+        y=PS
+    ]{
+        HV PS
+        32 0.35218
+        48 0.33729
+        80 0.35828
+        160 0.35397
+        320 0.37275
+        {} {}
+        
+        32 0.25577
+        48 0.26682
+        80 0.267
+        160 0.27722
+        320 0.2741
+        {} {}
+        
+        32 0.17886
+        48 0.17836
+        80 0.17915
+        160 0.18071
+        320 0.18113
+        {} {}
+        
+        32 0.11303
+        48 0.11471
+        80 0.11167
+        160 0.11581
+        320 0.11496
+        {} {}
+        
+        32 0.062417
+        48 0.059652
+        80 0.062621
+        160 0.063417
+        320 0.062322
+        {} {}        
+    };
+
+    \addplot[
+        mark=diamond,
+        color=blue
+    ] table[
+        x expr=\coordindex,
+        y=PS
+    ]{
+        HV PS
+        32 0.34781
+        48 0.33981
+        80 0.35909
+        160 0.35699
+        320 0.3718
+        {} {}
+        
+        32 0.25615
+        48 0.26688
+        80 0.26511
+        160 0.27554
+        320 0.27563
+        {} {}
+        
+        32 0.17851
+        48 0.17833
+        80 0.1785
+        160 0.1808
+        320 0.18151
+        {} {}
+        
+        32 0.1129
+        48 0.11513
+        80 0.11214
+        160 0.11599
+        320 0.11474
+        {} {}
+        
+        32 0.062285
+        48 0.05951
+        80 0.062457
+        160 0.063308
+        320 0.062364
+        {} {}        
+    };
+
+    \addplot[
+        mark=square,
+        color=green
+    ] table[
+        x expr=\coordindex,
+        y=PS
+    ]{
+        HV PS
+        32 0.34953
+        48 0.33824
+        80 0.35674
+        160 0.35653
+        320 0.37346
+        {} {}
+        
+        32 0.25418
+        48 0.26578
+        80 0.26657
+        160 0.27651
+        320 0.27593
+        {} {}
+        
+        32 0.17919
+        48 0.17864
+        80 0.17922
+        160 0.1801
+        320 0.18141
+        {} {}
+        
+        32 0.11303
+        48 0.1147
+        80 0.11164
+        160 0.11603
+        320 0.11476
+        {} {}
+        
+        32 0.062039
+        48 0.059229
+        80 0.062592
+        160 0.063437
+        320 0.062348
+        {} {}         
+    };
+
+    \addplot[
+        mark=triangle,
+        color=orange
+    ] table[
+        x expr=\coordindex,
+        y=PS
+    ]{
+        HV PS
+        32 0.40945
+        48 0.39318
+        80 0.40821
+        160 0.39679
+        320 0.40563
+        {} {}
+        
+        32 0.28787
+        48 0.29749
+        80 0.29227
+        160 0.2962
+        320 0.28989
+        {} {}
+        
+        32 0.19495
+        48 0.19212
+        80 0.18836
+        160 0.18734
+        320 0.1858
+        {} {}
+        
+        32 0.1201
+        48 0.12081
+        80 0.116
+        160 0.11865
+        320 0.1175
+        {} {}
+        
+        32 0.064898
+        48 0.06174
+        80 0.064357
+        160 0.064603
+        320 0.06339
+        {} {}                
+    };
+
+    \begin{scope}[
+        every label/.append style={
+            label distance=2ex,
+        },
+    ]
+        \node [label=below:500 servers]
+            at (axis cs:2,\pgfkeysvalueof{/pgfplots/ymin}) {};
+        \node [label=below:1000 servers]
+            at (axis cs:8,\pgfkeysvalueof{/pgfplots/ymin}) {};
+        \node [label=below:2000 servers]
+            at (axis cs:14,\pgfkeysvalueof{/pgfplots/ymin}) {};
+        \node [label=below:4000 servers]
+            at (axis cs:20,\pgfkeysvalueof{/pgfplots/ymin}) {};
+        \node [label=below:8000 servers]
+            at (axis cs:26,\pgfkeysvalueof{/pgfplots/ymin}) {};
+    \end{scope}
+    \end{axis}
+\end{tikzpicture}
+\end{document}

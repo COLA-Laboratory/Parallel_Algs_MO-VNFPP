@@ -1,0 +1,6 @@
+results_folder = 'D:\Research\NFV_MLS_Conf\data'
+max_evaluations = '12000'
+test_num_cores = 'false'
+fat_tree = 'false'
+dcell = 'true'
+leaf_spine = 'false'

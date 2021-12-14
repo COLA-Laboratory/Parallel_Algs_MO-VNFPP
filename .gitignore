@@ -1,0 +1,16 @@
+src/alg/target/
+src/alg/.vscode/
+Cargo.lock
+**/*.rs.bk
+
+data
+paper/__latexindent_temp.tex
+paper/main.aux
+paper/main.bbl
+paper/main.blg
+paper/main.fdb_latexmk
+paper/main.fls
+paper/main.log
+paper/main.pdf
+paper/main.synctex.gz
+src/alg/topology/*
